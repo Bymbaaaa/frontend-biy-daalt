@@ -1,5 +1,5 @@
 .header {
-    position: fixed; /* Keeps it at the top */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
@@ -9,7 +9,7 @@
     color: white;
     display: flex;
     align-items: center;
-    z-index: 1000; /* Ensures it stays above other content */
+    z-index: 1000;
 }
 
 .logo {

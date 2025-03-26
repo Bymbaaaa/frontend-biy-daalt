@@ -1,9 +1,14 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Card from "./components/card/Card";
 import Filter from "./components/filter/filter";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./components/home/homePage";
+import Contact from "./components/contact/Contact";
+import CartPage from "./components/cart/cart";
+import { CartProvider } from "./components/cart/cartOperations";
 
 const App = () => {
   const products = [
@@ -42,6 +47,13 @@ const App = () => {
       colors: ["cyan", "lime", "magenta", "indigo"],
       picture: 'https://example.com/product1.jpg'
     },
+    {
+      id: 6,
+      name: "product6",
+      price: 4.99,
+      colors: ["cyan", "lime", "magenta", "indigo"],
+      picture: 'https://example.com/product1.jpg'
+    }
   ];
 
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -59,21 +71,40 @@ const App = () => {
   };
 
   return (
-    <>
-    <Header/>
-    <div className="container">
-      <div className="filterBox">
-         <Filter onFilterChange={handleFilterChange} />
-      </div>
-    <div className="productBox">
-      {filteredProducts.map((product) => (
-        <Card key={product.id} name={product.name} price={product.price} colors={product.colors} img={product.picture} />
-      ))}
-    </div>
-    </div>
-    <Footer/>
-    </>
+    <CartProvider>
+      <Router>
+        <Header />
+        <main className="container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route
+              path="/card"
+              element={
+                <div className="productBox">
+                  <div className="filterBox">
+                    <Filter onFilterChange={handleFilterChange} />
+                  </div>
+                  {filteredProducts.map((product) => (
+                    <Card
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      price={product.price}
+                      colors={product.colors}
+                      img={product.picture}
+                    />
+                  ))}
+                </div>
+              }
+            />
+          </Routes>
+        </main>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
-}
+};
 
 export default App;
