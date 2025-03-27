@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ColorList from './ColorList';
 import { useCart } from '../cart/cartOperations';
+import { Link } from 'react-router-dom';
 
 const Card = ({ id, name, price, colors, img }) => {
     const [size, setSize] = useState(1);
@@ -30,9 +31,8 @@ const Card = ({ id, name, price, colors, img }) => {
     };
 
     return (
-        <div>
-            <div className='card'>
-                <div className='productImg'><img src={img} alt="" width={'230px'} height={'200px'} /></div>
+         <div className='card'>
+                <Link to={`/product/${id}`}><div className='productImg'><img src={img} alt="" width={'230px'} height={'200px'} /></div></Link>
                 <div style={{ display: 'flex', gap: '10px' }}>
                     <div className='text'>{name}</div>
                     <div className='text'>${price}</div>
@@ -49,8 +49,7 @@ const Card = ({ id, name, price, colors, img }) => {
                 <button onClick={handleAddToCart} className='text' style={{ border: 'none', backgroundColor: 'cyan', padding: '6px', marginTop: '10px', width: '200px', borderRadius: '20px' }}>
                     ADD TO CART
                 </button>
-            </div>
-        </div>
+            </div> 
     );
 };
 

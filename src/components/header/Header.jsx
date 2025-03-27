@@ -3,8 +3,10 @@ import "./Header.css";
 import logo from "./logo.png"
 import { Link } from "react-router-dom";
 import { useCart } from "../cart/cartOperations";
+import { useAuth } from "../AuthContext";
 
 export default function Header() {
+  const { isAuthenticated, logout } = useAuth();
   const { cart } = useCart();
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
@@ -14,9 +16,15 @@ export default function Header() {
               <Link to="/"> <strong>HOME</strong></Link>
               <Link to="/card"><strong>SHOP</strong></Link>
               <Link to="/contact"><strong>CONTACT</strong></Link>
-              <Link to="/cart" style={{ position: "relative", marginLeft: "20px" }}>
-                        🛒 Cart {totalItems > 0 && <span>({totalItems})</span>}
+              <Link to="/cart" style={{ position: "relative" }}>
+                        <strong>CART {totalItems > 0 && <span>({totalItems})</span>}</strong>
               </Link>
+              {isAuthenticated && <Link to="/profile"><strong>PROFILE</strong></Link>}
+                {isAuthenticated ? (
+                  <button onClick={logout}>Logout</button>
+              ) : (
+                  <Link to="/login">Login</Link>
+              )}
             </nav>
         </div>
   );
