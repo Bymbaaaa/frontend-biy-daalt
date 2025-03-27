@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './css/registerLogin.css'
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -22,13 +23,8 @@ const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        const { token } = data;
-
-        // Store the token in localStorage (or sessionStorage)
-        localStorage.setItem('token', token);
-
         alert('Registration successful');
-        window.location.href = '/login'; // Redirect to login page
+        window.location.href = '/login'; 
       } else {
         alert(data.error || 'Registration failed');
       }
@@ -38,31 +34,31 @@ const Register = () => {
   };
 
   return (
-    <div>
+    <div className='register-container'> 
       <h2>Register</h2>
       <form onSubmit={handleSubmit}>
-        <input
+        <input className='register-input' 
           type="text"
           placeholder="Enter your name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-        />
-        <input
+        /> <br />
+        <input className='register-input' 
           type="email"
           placeholder="Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        />
-        <input
+        /> <br />
+        <input className='register-input' 
           type="password"
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        />
-        <button type="submit">Register</button>
+        /> <br />
+        <button type="submit" className='register-button'>Register</button>
       </form>
     </div>
   );

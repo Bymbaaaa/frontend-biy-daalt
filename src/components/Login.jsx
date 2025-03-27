@@ -9,11 +9,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    login();
-    navigate("/"); 
+    login(); // You can keep this to set the authentication context to true
+    navigate("/"); // Redirect after login
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      alert('Please enter both email and password');
+      return;
+    }
 
     const requestBody = { email, password };
 
@@ -30,11 +36,11 @@ const Login = () => {
 
       if (response.ok) {
         const { token } = data;
-
-        // Store the token in localStorage (or sessionStorage)
         localStorage.setItem('token', token);
 
         alert('Login successful');
+        handleLogin(); // Proceed with setting authenticated status
+        navigate("/"); // Redirect after successful login
       } else {
         alert(data.error || 'Login failed');
       }
@@ -44,10 +50,11 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='register-container'>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <input
+          className='register-input'
           type="email"
           placeholder="Enter your email"
           value={email}
@@ -55,15 +62,18 @@ const Login = () => {
           required
         />
         <input
+          className='register-input'
           type="password"
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit" onClick={handleLogin}>Login</button>
+        <button type="submit" className='register-button'>Login</button>
       </form>
-      <Link to="/register" ><div>Dont have account yet? Click here to Register</div></Link>
+      <Link to="/register">
+        <div className='linkText'>Don't have an account yet? Click here to Register</div>
+      </Link>
     </div>
   );
 };
