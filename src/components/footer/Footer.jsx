@@ -1,9 +1,8 @@
 import React from "react";
-import "./Footer.css";
 
-export default function Footer(props) {
+export default function Footer() {
   return (
-    <div className="footer">
+    <div className="fixed bottom-0 left-0 w-full h-[80px] text-center bg-[rgb(103,162,129)] text-white flex items-center justify-center mt-[30px]">
         
     </div>
   );

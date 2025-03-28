@@ -16,7 +16,7 @@ const Filter = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="filter">
+    <div className="p-2.5 bg-[#f5f5f5] w-[200px] flex flex-col space-y-2.5">
       <h2>Filter Products</h2>
       <input
         type="text"
@@ -24,8 +24,14 @@ const Filter = ({ onFilterChange }) => {
         placeholder="Search by name"
         value={filters.name}
         onChange={handleChange}
+        className="w-full p-[5px]"
       />
-      <select name="color" value={filters.color} onChange={handleChange}>
+      <select
+        name="color"
+        value={filters.color}
+        onChange={handleChange}
+        className="w-full p-[5px]"
+      >
         <option value="">Select Color</option>
         <option value="red">Red</option>
         <option value="blue">Blue</option>
@@ -41,6 +47,7 @@ const Filter = ({ onFilterChange }) => {
         placeholder="Min Price"
         value={filters.minPrice}
         onChange={handleChange}
+        className="w-full p-[5px]"
       />
       <input
         type="number"
@@ -48,6 +55,7 @@ const Filter = ({ onFilterChange }) => {
         placeholder="Max Price"
         value={filters.maxPrice}
         onChange={handleChange}
+        className="w-full p-[5px]"
       />
     </div>
   );
